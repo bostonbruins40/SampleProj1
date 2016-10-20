@@ -20,7 +20,14 @@ namespace SampleProj1.Controllers
             }
             else
             {
-                frmModel.OutcomeMessage = ProcessTextMessageRequest(frmModel);
+                if (Request.HttpMethod == "POST")
+                {
+                    frmModel.OutcomeMessage = ProcessTextMessageRequest(frmModel);
+                }
+                else
+                {
+                    frmModel.OutcomeMessage = "";
+                }
             }
 
             return View(frmModel);

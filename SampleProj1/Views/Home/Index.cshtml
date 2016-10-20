@@ -1,0 +1,56 @@
+﻿@model SampleProj1.Models.SMSFormModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<div class="centerDiv">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-lg-6">
+                <h2>Send text message</h2>
+            </div>
+        </div>
+
+        @if(Model != null && !string.IsNullOrWhiteSpace(Model.OutcomeMessage))
+        {
+            <div class="row">
+                <div class="col-lg-6">
+                    <p class="text-danger"> @Model.OutcomeMessage </p>
+                </div>
+            </div>
+        }
+        
+        <div class="row pad-bottom-6">
+            <div class="col-md-4">
+                @Html.LabelFor(m => m.SentFromPhoneNumber)
+            </div>
+            <div class="col-md-5">
+                @Html.TextBoxFor(m => m.SentFromPhoneNumber, new { @class = "form-control", type = "tel", @pattern = @"((\d{3})|(\(\d{3}\)))[\W\.\-]?\d{3}[\w\.\-]\d{4}", @title = "Must be a valid phone number", @required = "required" })
+            </div>
+        </div>
+        <div class="row pad-bottom-6">
+            <div class="col-md-4">
+                @Html.LabelFor(m => m.SendToPhoneNumber)
+            </div>
+            <div class="col-md-5">
+                @Html.TextBoxFor(m => m.SendToPhoneNumber, new { @class = "form-control", type = "tel", @pattern = @"((\d{3})|(\(\d{3}\)))[\W\.\-]?\d{3}[\w\.\-]\d{4}", @title = "Must be a valid phone number", @required = "required" })
+            </div>
+        </div>
+        <div class="row pad-bottom-12">
+            <div class="col-md-4">
+                @Html.LabelFor(m => m.SendToMessage)
+            </div>
+            <div class="col-md-5">
+                @Html.TextAreaFor(m => m.SendToMessage, new { @class = "form-control", @required = "required" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+                <input type="submit" class="btn btn-default" title="Send Message" value="Send Message" />
+            </div>
+        </div>
+    </div>
+</div>
+}
